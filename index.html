@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社フォローリンクス</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --fog: #f5f3ef;
+    --ash: #e8e4de;
+    --stone: #8a8480;
+    --gold: #b8924a;
+    --gold-light: #d4ad72;
+    --white: #fdfcfa;
+    --serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+    --sans: 'Noto Sans JP', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.8;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(253,252,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ash);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-size: 10px;
+    font-family: var(--sans);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--stone);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    color: var(--stone);
+    transition: color 0.3s;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ─── HERO ─────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    padding-top: 90px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 60px;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  .hero-ja {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .hero-en {
+    font-family: var(--serif);
+    font-size: clamp(13px, 1.4vw, 18px);
+    font-style: italic;
+    color: var(--stone);
+    letter-spacing: 0.04em;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-tagline {
+    font-size: 13px;
+    line-height: 2;
+    color: #5a5550;
+    max-width: 380px;
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  .hero-right {
+    background: var(--fog);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(184,146,74,0.06) 0%, transparent 60%);
+  }
+
+  .hero-deco-text {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    font-family: var(--serif);
+    font-size: 80px;
+    font-weight: 300;
+    color: rgba(138,132,128,0.12);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 48px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--stone);
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* ─── SECTION BASE ─────────────────────── */
+  section {
+    padding: 120px 60px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    margin-bottom: 60px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  /* ─── PHILOSOPHY ─────────────────────── */
+  #philosophy {
+    background: var(--fog);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .philosophy-left { }
+
+  .philosophy-quote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 300;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .philosophy-quote::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .philosophy-body {
+    font-size: 14px;
+    line-height: 2.2;
+    color: #5a5550;
+  }
+
+  .philosophy-right {
+    padding-top: 20px;
+  }
+
+  .philosophy-creed {
+    font-family: var(--serif);
+    font-size: clamp(13px, 1.3vw, 17px);
+    font-style: italic;
+    line-height: 2;
+    color: var(--stone);
+    border-top: 1px solid var(--ash);
+    border-bottom: 1px solid var(--ash);
+    padding: 32px 0;
+    margin-top: 32px;
+  }
+
+  /* ─── MESSAGE ─────────────────────────── */
+  #message {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .message-photo-wrap {
+    position: relative;
+  }
+
+  .message-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--ash);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .message-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--stone);
+  }
+
+  .photo-placeholder-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--ash);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-placeholder-icon svg {
+    opacity: 0.4;
+  }
+
+  .photo-placeholder p {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+  }
+
+  .message-name-block {
+    margin-top: 20px;
+  }
+
+  .message-role {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--stone);
+    margin-bottom: 6px;
+  }
+
+  .message-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  }
+
+  .message-name-en {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--stone);
+    margin-top: 3px;
+  }
+
+  .message-content { }
+
+  .message-heading {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    margin-bottom: 36px;
+    color: var(--ink);
+  }
+
+  .message-text {
+    font-size: 14px;
+    line-height: 2.4;
+    color: #5a5550;
+  }
+
+  /* ─── SERVICES ─────────────────────────── */
+  #services {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  #services .section-title { color: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .service-item {
+    padding: 44px 32px;
+    background: var(--ink);
+    transition: background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .service-item:hover::before { transform: scaleX(1); }
+  .service-item:hover { background: #222; }
+
+  .service-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    color: rgba(184,146,74,0.25);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .service-name {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+    color: rgba(253,252,250,0.85);
+  }
+
+  .service-en {
+    font-family: var(--serif);
+    font-size: 11px;
+    font-style: italic;
+    color: rgba(184,146,74,0.6);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── COMPANY ─────────────────────────── */
+  #company {
+    background: var(--fog);
+  }
+
+  .company-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--ash);
+  }
+
+  .company-row {
+    display: contents;
+  }
+
+  .company-label,
+  .company-value {
+    padding: 24px 36px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--ash);
+  }
+
+  .company-label {
+    background: var(--white);
+    color: var(--stone);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    border-right: 1px solid var(--ash);
+    display: flex;
+    align-items: center;
+  }
+
+  .company-value {
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.9;
+  }
+
+  .company-row:last-child .company-label,
+  .company-row:last-child .company-value {
+    border-bottom: none;
+  }
+
+  /* ─── CONTACT / FOOTER ─────────────────── */
+  #contact {
+    background: var(--ink);
+    color: var(--white);
+    text-align: center;
+    padding: 100px 60px;
+  }
+
+  #contact .section-label { color: var(--gold); }
+  #contact .section-title {
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .contact-sub {
+    font-size: 13px;
+    color: rgba(253,252,250,0.45);
+    margin-bottom: 56px;
+    letter-spacing: 0.1em;
+  }
+
+  footer {
+    background: #111;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #222;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: rgba(253,252,250,0.5);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: rgba(253,252,250,0.25);
+    letter-spacing: 0.15em;
+  }
+
+  /* ─── RESPONSIVE ─────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    .nav-links { display: none; }
+
+    section { padding: 80px 28px; }
+
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 100px 28px 60px; }
+
+    #philosophy { grid-template-columns: 1fr; gap: 40px; }
+    #message { grid-template-columns: 1fr; }
+    .message-photo { max-width: 260px; }
+
+    .services-grid { grid-template-columns: 1fr 1fr; }
+
+    .company-grid { grid-template-columns: 1fr; }
+    .company-label { border-right: none; border-bottom: 1px solid var(--ash); }
+
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── FADE-IN ANIMATION ──────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-up.d1 { transition-delay: 0.1s; }
+  .fade-up.d2 { transition-delay: 0.22s; }
+  .fade-up.d3 { transition-delay: 0.34s; }
+  .fade-up.d4 { transition-delay: 0.46s; }
+  .fade-up.d5 { transition-delay: 0.58s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    株式会社フォローリンクス
+    <span>FOLLOWLINX Inc.</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">企業理念</a></li>
+    <li><a href="#message">代表メッセージ</a></li>
+    <li><a href="#services">事業内容</a></li>
+    <li><a href="#company">会社概要</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow fade-up">FOLLOWLINX Inc. — Est. 2026</p>
+    <h1 class="hero-ja fade-up d1">その生き方が、<br>誰かの力になる。</h1>
+    <p class="hero-en fade-up d2">Your way of life becomes someone's strength.</p>
+    <p class="hero-tagline fade-up d3">
+      花は香り、人は人柄。<br>
+      誠実に向き合うその姿勢こそが、<br>
+      関わるすべての方々への<br>
+      ポジティブな力になると信じています。
+    </p>
+    <div class="hero-scroll fade-up d4">
+      <span class="scroll-line"></span>
+      SCROLL
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="first-photo.jpg" alt="フォローリンクス" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="philosophy-left">
+    <p class="section-label fade-up">Philosophy</p>
+    <h2 class="section-title fade-up d1">企業理念</h2>
+    <div class="philosophy-quote fade-up d2">
+      『その生き方が、<br>誰かの力になる。』
+    </div>
+    <p class="philosophy-body fade-up d3">
+      「花は香り 人は人柄」という言葉があります。<br><br>
+      花がその香りで人を惹きつけるように、人もまた、肩書きや外見ではなく、言葉遣いや気遣い、思いやりといった「人柄」にこそ魅力が宿ると私たちは考えます。<br><br>
+      常に自分自身を磨き続け、関わるすべての人々に正の影響を与えられる。<br>
+      そんな存在であることを目指します。
+    </p>
+  </div>
+  <div class="philosophy-right fade-up d2">
+    <p class="section-label">Core Value</p>
+    <h3 class="section-title" style="font-size: clamp(20px,2.2vw,30px); margin-bottom: 24px;">人柄が、すべてを<br>動かす。</h3>
+    <p class="philosophy-body">
+      私たちは「その生き方が、誰かの力になる」という信念のもと、個人と組織の可能性を最大化するために事業を展開しています。<br><br>
+      採用・研修・マーケティング・営業・web制作など、多岐にわたる領域で、誠実さと人柄を軸に、お客様の成長に伴走します。
+    </p>
+    <div class="philosophy-creed">
+      花は香り、人は人柄。
+      <span style="font-size:12px; color: var(--gold-light);">A flower by its fragrance, a person by their character.</span>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGE -->
+<section id="message">
+  <div class="message-photo-wrap fade-up">
+    <div class="message-photo">
+      <!-- 代表者写真（縦長4:3）をここに差し替えてください -->
+      <!-- <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8a8480" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </div>
+        <p>代表者写真 (縦長4:3)</p>
+      </div> -->
+      <img src="your-photo.jpg" alt="成山 響"> 
+    </div>
+    <div class="message-name-block">
+      <p class="message-role">代表取締役</p>
+      <p class="message-name">成山 響</p>
+      <p class="message-name-en">Hibiki Nariyama</p>
+    </div>
+  </div>
+
+  <div class="message-content">
+    <p class="section-label fade-up">Message</p>
+    <h2 class="section-title fade-up d1">代表メッセージ</h2>
+    <h3 class="message-heading fade-up d2">
+      「花は香り、人は人柄」を<br>体現する組織へ
+    </h3>
+    <p class="message-text fade-up d3">
+      私たちは「その生き方が、誰かの力になる」という信念を大切にしています。<br><br>
+      花が香りで周囲を癒やすように、私たちもまた、目に見える実績（肩書き）以上に、日々の言葉遣いや細やかな気遣いといった「人柄」を大切にしたい。<br><br>
+      誠実に向き合うその姿勢こそが、関わるすべての方々へのポジティブな力になると信じ、今日も磨き続けます。
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label fade-up">Services</p>
+  <h2 class="section-title fade-up d1">事業内容</h2>
+  <div class="services-grid">
+    <div class="service-item fade-up d1">
+      <div class="service-num">01</div>
+      <div class="service-name">採用コンサルティング<br>事業</div>
+      <div class="service-en">Recruitment Consulting</div>
+    </div>
+    <div class="service-item fade-up d2">
+      <div class="service-num">02</div>
+      <div class="service-name">研修事業</div>
+      <div class="service-en">Training & Development</div>
+    </div>
+    <div class="service-item fade-up d3">
+      <div class="service-num">03</div>
+      <div class="service-name">SNS事業</div>
+      <div class="service-en">Social Media Marketing</div>
+    </div>
+    <div class="service-item fade-up d4">
+      <div class="service-num">04</div>
+      <div class="service-name">営業代行事業</div>
+      <div class="service-en">Sales Outsourcing</div>
+    </div>
+    <div class="service-item fade-up d5">
+      <div class="service-num">05</div>
+      <div class="service-name">Web制作事業</div>
+      <div class="service-en">Web Design & Development</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section id="company">
+  <p class="section-label fade-up">Company</p>
+  <h2 class="section-title fade-up d1">会社概要</h2>
+  <div class="company-grid fade-up d2">
+    <div class="company-row">
+      <div class="company-label">会社名</div>
+      <div class="company-value">株式会社フォローリンクス</div>
+    </div>
+    <div class="company-row">
+      <div class="company-label">英語表記</div>
+      <div class="company-value">FOLLOWLINX Inc.</div>
+    </div>
+    <div class="company-row">
+      <div class="company-label">代表取締役</div>
+      <div class="company-value">成山 響</div>
+    </div>
+    <div class="company-row">
+      <div class="company-label">設立</div>
+      <div class="company-value">2026年4月</div>
+    </div>
+    <div class="company-row">
+      <div class="company-label">本社所在地</div>
+      <div class="company-value">大阪府大阪市北区長柄中1丁目7-15-901</div>
+    </div>
+    <div class="company-row">
+      <div class="company-label">事業内容</div>
+      <div class="company-value">
+        採用コンサルティング事業 / 研修事業<br>
+        SNS事業 / 営業代行事業 / Web制作事業
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label fade-up">Contact</p>
+  <h2 class="section-title fade-up d1">お問い合わせ</h2>
+  <p class="contact-sub fade-up d2">ご相談・お問い合わせはお気軽にどうぞ</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">株式会社フォローリンクス</div>
+  <p class="footer-copy">© 2026 FOLLOWLINX Inc. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
