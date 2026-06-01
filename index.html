@@ -570,12 +570,48 @@
 
   /* ─── RESPONSIVE ─────────────────────── */
   @media (max-width: 900px) {
-    nav { padding: 20px 28px; }
+    nav { padding: 0 28px; }
+    .nav-logo img { height: 64px; }
+    .nav-contact { display: none; }
+
+    /* ナビリンク：縦プルダウン */
+    .nav-links {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      transform: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      background: rgba(253,252,250,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--ash);
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      opacity: 1;
+      visibility: visible;
+      transition: max-height 0.4s ease;
+    }
+
+    .nav-links.open {
+      max-height: 400px;
+      padding: 28px 0;
+    }
+
+    .nav-links li a {
+      display: block;
+      padding: 16px 40px;
+      font-size: 16px;
+      letter-spacing: 0.2em;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
 
     section { padding: 80px 28px; }
 
     .hero-center-logo { width: clamp(160px, 60vw, 280px); }
-    .hero-catch { font-size: 16px; letter-spacing: 0.15em; }
+    .hero-catch { font-size: 16px; letter-spacing: 0.15em; margin-top: -35px; }
 
     #philosophy { gap: 32px; }
     #message { grid-template-columns: 1fr; }
