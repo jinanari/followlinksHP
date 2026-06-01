@@ -30,7 +30,7 @@
     font-family: var(--sans);
     background: var(--white);
     color: var(--ink);
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.8;
     font-weight: 300;
     overflow-x: hidden;
@@ -45,9 +45,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(253,252,250,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--ash);
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
   }
 
   .nav-logo {
@@ -62,132 +63,172 @@
     display: block;
   }
 
+  nav.open {
+    background: rgba(253,252,250,0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ash);
+  }
+
+  .nav-contact {
+    position: fixed;
+    top: 30px;
+    right: 220px;
+    z-index: 101;
+    font-size: 17px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 20px 52px;
+    border: 3px solid var(--gold);
+    background: white;
+    white-space: nowrap;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .nav-contact:hover {
+    background: var(--gold);
+    color: white;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.45);
+    border: none;
+    border-radius: 50%;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--ink);
+    transform-origin: center;
+  }
+
   .nav-links {
     display: flex;
     gap: 40px;
     list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav-links a {
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing: 0.2em;
     text-decoration: none;
-    color: var(--stone);
+    color: var(--ink);
     transition: color 0.3s;
     font-weight: 400;
+    font-size: 15px;
   }
 
-  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover { color: var(--stone); }
 
   /* ─── HERO ─────────────────────────────── */
   #hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     position: relative;
-    padding-top: 90px;
-  }
-
-  .hero-left {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: 80px 60px 80px 60px;
-    position: relative;
-  }
-
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.35em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    font-weight: 400;
-  }
-
-  .hero-ja {
-    font-family: var(--serif);
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: 0.05em;
-    margin-bottom: 16px;
-  }
-
-  .hero-en {
-    font-family: var(--serif);
-    font-size: clamp(13px, 1.4vw, 18px);
-    font-style: italic;
-    color: var(--stone);
-    letter-spacing: 0.04em;
-    margin-bottom: 48px;
-    font-weight: 300;
-  }
-
-  .hero-tagline {
-    font-size: 13px;
-    line-height: 2;
-    color: #5a5550;
-    max-width: 380px;
-    border-left: 2px solid var(--gold);
-    padding-left: 20px;
-  }
-
-  .hero-right {
-    background: var(--fog);
-    position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
   }
 
-  .hero-right::before {
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-bg::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, rgba(184,146,74,0.06) 0%, transparent 60%);
+    background: rgba(16,14,12,0.40);
   }
 
-  .hero-deco-text {
-    position: absolute;
-    top: 40px;
-    right: 40px;
+  .hero-center {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    text-align: center;
+    margin-top: -60px;
+  }
+
+  .hero-catch {
+    position: relative;
+    z-index: 2;
     font-family: var(--serif);
-    font-size: 80px;
+    font-size: clamp(18px, 2vw, 28px);
     font-weight: 300;
-    color: rgba(138,132,128,0.12);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    pointer-events: none;
-    user-select: none;
+    color: rgba(255,255,255,0.88);
+    letter-spacing: 0.28em;
+    margin-top: -50px;
+  }
+
+  .hero-center-logo {
+    position: relative;
+    z-index: 1;
+    width: clamp(494px, 68vw, 936px);
+    height: auto;
+    filter:
+      drop-shadow(1px 0 0 white)
+      drop-shadow(-1px 0 0 white)
+      drop-shadow(0 1px 0 white)
+      drop-shadow(0 -1px 0 white);
   }
 
   .hero-scroll {
     position: absolute;
     bottom: 48px;
-    left: 60px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 14px;
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 0.25em;
-    color: var(--stone);
+    color: rgba(255,255,255,0.45);
+    z-index: 1;
   }
 
   .scroll-line {
     width: 40px;
     height: 1px;
-    background: var(--gold);
+    background: rgba(255,255,255,0.35);
   }
 
   /* ─── SECTION BASE ─────────────────────── */
   section {
-    padding: 120px 60px;
+    padding: 120px 140px;
   }
 
   .section-label {
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 0.35em;
     color: var(--gold);
     text-transform: uppercase;
@@ -214,9 +255,12 @@
   /* ─── PHILOSOPHY ─────────────────────── */
   #philosophy {
     background: var(--fog);
+  }
+
+  .philosophy-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1fr;
+    gap: 60px;
     align-items: start;
   }
 
@@ -242,7 +286,7 @@
   }
 
   .philosophy-body {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 2.2;
     color: #5a5550;
   }
@@ -326,7 +370,7 @@
   }
 
   .message-role {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.25em;
     color: var(--stone);
     margin-bottom: 6px;
@@ -334,14 +378,14 @@
 
   .message-name {
     font-family: var(--serif);
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 400;
     letter-spacing: 0.1em;
   }
 
   .message-name-en {
     font-family: var(--serif);
-    font-size: 13px;
+    font-size: 15px;
     font-style: italic;
     color: var(--stone);
     margin-top: 3px;
@@ -360,7 +404,7 @@
   }
 
   .message-text {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 2.4;
     color: #5a5550;
   }
@@ -405,7 +449,7 @@
 
   .service-num {
     font-family: var(--serif);
-    font-size: 36px;
+    font-size: 44px;
     font-weight: 300;
     color: rgba(184,146,74,0.25);
     line-height: 1;
@@ -414,7 +458,7 @@
   }
 
   .service-name {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.05em;
     line-height: 1.7;
@@ -423,7 +467,7 @@
 
   .service-en {
     font-family: var(--serif);
-    font-size: 11px;
+    font-size: 13px;
     font-style: italic;
     color: rgba(184,146,74,0.6);
     margin-top: 8px;
@@ -437,9 +481,12 @@
 
   .company-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.7fr 1.4fr;
     gap: 0;
     border: 1px solid var(--ash);
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .company-row {
@@ -449,14 +496,14 @@
   .company-label,
   .company-value {
     padding: 24px 36px;
-    font-size: 14px;
+    font-size: 16px;
     border-bottom: 1px solid var(--ash);
   }
 
   .company-label {
     background: var(--white);
     color: var(--stone);
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.15em;
     font-weight: 400;
     border-right: 1px solid var(--ash);
@@ -480,7 +527,7 @@
     background: var(--ink);
     color: var(--white);
     text-align: center;
-    padding: 100px 60px;
+    padding: 100px 140px;
   }
 
   #contact .section-label { color: var(--gold); }
@@ -490,7 +537,7 @@
   }
 
   .contact-sub {
-    font-size: 13px;
+    font-size: 15px;
     color: rgba(253,252,250,0.45);
     margin-bottom: 56px;
     letter-spacing: 0.1em;
@@ -498,7 +545,7 @@
 
   footer {
     background: #111;
-    padding: 40px 60px;
+    padding: 40px 140px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -513,7 +560,7 @@
   }
 
   .footer-copy {
-    font-size: 10px;
+    font-size: 13px;
     color: rgba(253,252,250,0.25);
     letter-spacing: 0.15em;
   }
@@ -521,24 +568,22 @@
   /* ─── RESPONSIVE ─────────────────────── */
   @media (max-width: 900px) {
     nav { padding: 20px 28px; }
-    .nav-links { display: none; }
 
     section { padding: 80px 28px; }
 
-    #hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 100px 28px 60px; }
+    .hero-center-logo { width: clamp(160px, 60vw, 280px); }
+    .hero-catch { font-size: 16px; letter-spacing: 0.15em; }
 
-    #philosophy { grid-template-columns: 1fr; gap: 40px; }
+    #philosophy { gap: 32px; }
     #message { grid-template-columns: 1fr; }
     .message-photo { max-width: 260px; }
 
     .services-grid { grid-template-columns: 1fr 1fr; }
 
-    .company-grid { grid-template-columns: 1fr; }
+    .company-grid { grid-template-columns: 1fr; max-width: 100%; }
     .company-label { border-right: none; border-bottom: 1px solid var(--ash); }
 
-    footer { flex-direction: column; gap: 12px; text-align: center; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 28px; }
   }
 
   @media (max-width: 600px) {
@@ -562,6 +607,100 @@
   .fade-up.d3 { transition-delay: 0.34s; }
   .fade-up.d4 { transition-delay: 0.46s; }
   .fade-up.d5 { transition-delay: 0.58s; }
+
+  /* ─── SERVICE DETAIL PANEL ─────────────── */
+  .service-item { cursor: pointer; }
+
+  .service-item.active::before { transform: scaleX(1); }
+
+  .service-detail {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 1px;
+  }
+
+  .service-detail.open {
+    max-height: 640px;
+    opacity: 1;
+  }
+
+  .service-detail-inner {
+    padding: 52px 0 60px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .service-detail-num {
+    font-family: var(--serif);
+    font-size: 52px;
+    font-weight: 300;
+    color: rgba(184,146,74,0.18);
+    line-height: 1;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .service-detail-title {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.7vw, 22px);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .service-detail-en {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+  }
+
+  .service-detail-text {
+    font-size: 15px;
+    line-height: 2.3;
+    color: rgba(253,252,250,0.58);
+  }
+
+  .service-detail-areas {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+  }
+
+  .service-detail-areas-label {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .service-detail-areas ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .service-detail-areas ul li {
+    font-size: 13px;
+    color: rgba(253,252,250,0.55);
+    padding: 7px 16px;
+    border: 1px solid rgba(255,255,255,0.12);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 900px) {
+    .service-detail-inner { padding: 36px 0 44px; }
+    .service-detail.open { max-height: 900px; }
+  }
 </style>
 </head>
 <body>
@@ -571,62 +710,49 @@
   <a href="#hero" class="nav-logo">
     <img src="logo.png" alt="株式会社フォローリンクス">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#philosophy">企業理念</a></li>
     <li><a href="#message">代表メッセージ</a></li>
     <li><a href="#services">事業内容</a></li>
     <li><a href="#company">会社概要</a></li>
-    <li><a href="#contact">お問い合わせ</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
+<a href="#contact" class="nav-contact">お問い合わせはこちら</a>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow fade-up">Followlinks Inc. — Est. 2026</p>
-    <h1 class="hero-ja fade-up d1">その生き方が、<br>誰かの力になる。</h1>
-    <p class="hero-en fade-up d2">Your way of life becomes someone's strength.</p>
-    <p class="hero-tagline fade-up d3">
-      花は香り、人は人柄。<br>
-      誠実に向き合うその姿勢こそが、<br>
-      関わるすべての方々への<br>
-      ポジティブな力になると信じています。
-    </p>
-    <div class="hero-scroll fade-up d4">
-      <span class="scroll-line"></span>
-      SCROLL
-    </div>
+  <div class="hero-bg">
+    <img src="20240316-002.avif" alt="フォローリンクス">
   </div>
-  <div class="hero-right">
-    <img src="first-photo.jpg" alt="フォローリンクス" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+  <div class="hero-center fade-up">
+    <img src="logo.png" alt="株式会社フォローリンクス" class="hero-center-logo">
+    <p class="hero-catch">つながりが、未来を動かす。</p>
   </div>
 </section>
 
 <!-- PHILOSOPHY -->
 <section id="philosophy">
-  <div class="philosophy-left">
-    <p class="section-label fade-up">Philosophy</p>
-    <h2 class="section-title fade-up d1">企業理念</h2>
-    <div class="philosophy-quote fade-up d2">
-      『その生き方が、<br>誰かの力になる。』
+  <div class="philosophy-inner">
+    <div class="philosophy-left">
+      <p class="section-label fade-up">Philosophy</p>
+      <h2 class="section-title fade-up d1">企業理念</h2>
+      <div class="philosophy-quote fade-up d2">
+        『その生き方が、<br>誰かの力になる。』
+      </div>
+      <p class="philosophy-body fade-up d3">「花は香り 人は人柄」という言葉があります。<br><br>花がその香りで人を惹きつけるように、人もまた、肩書きや外見ではなく、言葉遣いや気遣い、思いやりといった「人柄」にこそ魅力が宿ると私たちは考えます。<br><br>常に自分自身を磨き続け、関わるすべての人々に正の影響を与えられる。<br>そんな存在であることを目指します。</p>
     </div>
-    <p class="philosophy-body fade-up d3">
-      「花は香り 人は人柄」という言葉があります。<br><br>
-      花がその香りで人を惹きつけるように、人もまた、肩書きや外見ではなく、言葉遣いや気遣い、思いやりといった「人柄」にこそ魅力が宿ると私たちは考えます。<br><br>
-      常に自分自身を磨き続け、関わるすべての人々に正の影響を与えられる。<br>
-      そんな存在であることを目指します。
-    </p>
-  </div>
-  <div class="philosophy-right fade-up d2">
-    <p class="section-label">Core Value</p>
-    <h3 class="section-title" style="font-size: clamp(20px,2.2vw,30px); margin-bottom: 24px;">人柄が、すべてを<br>動かす。</h3>
-    <p class="philosophy-body">
-      私たちは「その生き方が、誰かの力になる」という信念のもと、個人と組織の可能性を最大化するために事業を展開しています。<br><br>
-      採用・研修・マーケティング・営業・web制作など、多岐にわたる領域で、誠実さと人柄を軸に、お客様の成長に伴走します。
-    </p>
-    <div class="philosophy-creed">
-      花は香り、人は人柄。<br>
-      <span style="font-size:12px; color: var(--gold-light);">A flower by its fragrance, a person by their character.</span>
+    <div class="philosophy-right fade-up d2">
+      <p class="section-label">Core Value</p>
+      <h3 class="section-title" style="font-size: clamp(20px,2.2vw,30px); margin-bottom: 24px;">人柄が、すべてを<br>動かす。</h3>
+      <p class="philosophy-body">私たちは「その生き方が、誰かの力になる」という信念のもと、個人と組織の可能性を最大化するために事業を展開しています。<br><br>採用・研修・マーケティング・営業・web制作など、多岐にわたる領域で、誠実さと人柄を軸に、お客様の成長に伴走します。</p>
+      <div class="philosophy-creed">
+        花は香り、人は人柄。<br><span style="font-size:13px; color: var(--gold-light);">A flower by its fragrance, a person by their character.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -635,7 +761,7 @@
 <section id="message">
   <div class="message-photo-wrap fade-up">
     <div class="message-photo">
-      <img src="your-photo.jpg" alt="成山 響">
+      <img src="hibiki.avif" alt="成山 響">
     </div>
     <div class="message-name-block">
       <p class="message-role">代表取締役</p>
@@ -650,11 +776,7 @@
     <h3 class="message-heading fade-up d2">
       「花は香り、人は人柄」を<br>体現する組織へ
     </h3>
-    <p class="message-text fade-up d3">
-      私たちは「その生き方が、誰かの力になる」という信念を大切にしています。<br><br>
-      花が香りで周囲を癒やすように、私たちもまた、目に見える実績（肩書き）以上に、日々の言葉遣いや細やかな気遣いといった「人柄」を大切にしたい。<br><br>
-      誠実に向き合うその姿勢こそが、関わるすべての方々へのポジティブな力になると信じ、今日も磨き続けます。
-    </p>
+    <p class="message-text fade-up d3">私たちは「その生き方が、誰かの力になる」という信念を大切にしています。<br><br>花が香りで周囲を癒やすように、私たちもまた、目に見える実績（肩書き）以上に、日々の言葉遣いや細やかな気遣いといった「人柄」を大切にしたい。<br><br>誠実に向き合うその姿勢こそが、関わるすべての方々へのポジティブな力になると信じ、今日も磨き続けます。</p>
   </div>
 </section>
 
@@ -663,30 +785,45 @@
   <p class="section-label fade-up">Services</p>
   <h2 class="section-title fade-up d1">事業内容</h2>
   <div class="services-grid">
-    <div class="service-item fade-up d1">
+    <div class="service-item fade-up d1" data-service="01">
       <div class="service-num">01</div>
       <div class="service-name">採用コンサルティング<br>事業</div>
       <div class="service-en">Recruitment Consulting</div>
     </div>
-    <div class="service-item fade-up d2">
+    <div class="service-item fade-up d2" data-service="02">
       <div class="service-num">02</div>
       <div class="service-name">研修事業</div>
       <div class="service-en">Training & Development</div>
     </div>
-    <div class="service-item fade-up d3">
+    <div class="service-item fade-up d3" data-service="03">
       <div class="service-num">03</div>
       <div class="service-name">SNS事業</div>
       <div class="service-en">Social Media Marketing</div>
     </div>
-    <div class="service-item fade-up d4">
+    <div class="service-item fade-up d4" data-service="04">
       <div class="service-num">04</div>
       <div class="service-name">営業代行事業</div>
       <div class="service-en">Sales Outsourcing</div>
     </div>
-    <div class="service-item fade-up d5">
+    <div class="service-item fade-up d5" data-service="05">
       <div class="service-num">05</div>
       <div class="service-name">Web制作事業</div>
       <div class="service-en">Web Design & Development</div>
+    </div>
+  </div>
+
+  <div class="service-detail" id="service-detail">
+    <div class="service-detail-inner">
+      <div class="service-detail-body">
+        <p class="service-detail-num"></p>
+        <h3 class="service-detail-title"></h3>
+        <p class="service-detail-en"></p>
+        <p class="service-detail-text"></p>
+      </div>
+      <div class="service-detail-areas">
+        <p class="service-detail-areas-label">対応領域</p>
+        <ul></ul>
+      </div>
     </div>
   </div>
 </section>
@@ -710,7 +847,11 @@
     </div>
     <div class="company-row">
       <div class="company-label">設立</div>
-      <div class="company-value">2026年4月</div>
+      <div class="company-value">2026年5月7日</div>
+    </div>
+    <div class="company-row">
+      <div class="company-label">資本金</div>
+      <div class="company-value">200万円</div>
     </div>
     <div class="company-row">
       <div class="company-label">本社所在地</div>
@@ -740,6 +881,26 @@
 </footer>
 
 <script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  const navEl = document.querySelector('nav');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+    navEl.classList.toggle('open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+      navEl.classList.remove('open');
+    });
+  });
+
   // Intersection Observer for fade-up
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -751,6 +912,75 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Service detail accordion
+  const serviceData = {
+    '01': {
+      title: '採用コンサルティング事業',
+      en: 'Recruitment Consulting',
+      body: '企業の持続的な成長を支えるコアとなる「人材獲得」を、戦略立案から実務実行までトータルで支援するコンサルティングサービスです。新卒・中途採用における戦略設計はもちろん、アルバイトやインターンシップ採用、求人広告の選定、独自の採用イベントの企画・運営に至るまで、幅広いニーズに対応いたします。また、人事リソースが不足する企業様に向けては、母集団形成から選考管理までを代行するアウトソーシング（RPO）サービスも提供。単なる手法の提供に留まらず、各企業の文化やビジョンに真にマッチした優秀な人材との出会いを確実なものにします。',
+      areas: ['新卒採用支援', '中途採用支援', 'アルバイト採用', 'インターン採用', '求人広告', '採用イベント企画', 'アウトソーシング（RPO）']
+    },
+    '02': {
+      title: '研修事業',
+      en: 'Training & Development',
+      body: '組織の基準を引き上げ、永続的に成果を生み出す人材を育成するための教育・研修プログラムを提供しています。私たちの最大の強みは、スキルやノウハウの習得だけではなく、自立自走する組織の土台となる「マインドセット（意識改革・当事者意識の醸成）」を徹底的に行う点にあります。新卒社員や中途採用社員を対象とした合宿研修をはじめ、日帰り研修、ビジネスマナー研修、管理職研修まで、企業の成長フェーズに合わせた最適なカリキュラムを展開します。',
+      areas: ['新卒・中途合宿研修', '日帰り研修', 'ビジネスマナー研修', '管理職研修', 'マインドセット研修']
+    },
+    '03': {
+      title: 'SNS事業',
+      en: 'Social Media Marketing',
+      body: '現代のマーケティングおよび採用活動において欠かせないメディアとなったSNSを、戦略的に活用するためのトータルソリューションです。各プラットフォームのアルゴリズムを分析し、ブランド認知拡大やファン獲得を狙うSNS運用コンサルティングから、ターゲットの視線を一瞬で奪うショート動画の企画・制作までオーダーメイドで対応可能。SNS採用（ソーシャルリクルーティング）領域にも強みを持ち、ミスマッチのない母集団形成を実現します。',
+      areas: ['SNS運用コンサルティング', 'ショート動画制作', 'SNS採用（ソーシャルリクルーティング）', 'その他SNS関連支援']
+    },
+    '04': {
+      title: '営業代行事業',
+      en: 'Sales Outsourcing',
+      body: 'クライアント企業の「売上拡大」と「市場開拓」を最速で実現するための、プロフェッショナルによる営業アウトソーシングサービスです。ターゲットの選定からアプローチ、商談、クロージングに至るまでの営業プロセスを経験豊富な営業チームが代行し、確度の高い新規顧客を開拓します。商品・サービスの魅力を最大限に引き出す販売促進（プロモーション）戦略の立案・実行も同時展開。売れる仕組みそのものを構築し、クライアント企業の事業成長にダイレクトにコミットします。',
+      areas: ['営業代行（新規開拓・商談代行）', '販売促進（プロモーション企画・実行）', '営業戦略設計']
+    },
+    '05': {
+      title: 'Web制作事業',
+      en: 'Web Design & Development',
+      body: '企業のデジタル接点をデザインし、ビジネスの成果（コンバージョン）を生み出すクリエイティブ制作を行います。コーポレートサイト（HP）、求職者の心を動かし応募へ繋げる採用HP、ターゲットにピンポイントで訴求するWeb広告（ランディングページ等）の制作・運用までトータルサポート。パンフレット等のグラフィックデザインや採用動画・PV制作まで一貫して対応し、戦略に基づいた美しいクリエイティブで企業のブランド価値を最大化します。',
+      areas: ['コーポレートサイト（HP）制作', '採用HP制作', 'Web広告（LP含む）', 'パンフレットデザイン', '採用動画・プロモーション動画制作']
+    }
+  };
+
+  const detail = document.getElementById('service-detail');
+  const detailNum = detail.querySelector('.service-detail-num');
+  const detailTitle = detail.querySelector('.service-detail-title');
+  const detailEn = detail.querySelector('.service-detail-en');
+  const detailText = detail.querySelector('.service-detail-text');
+  const detailAreas = detail.querySelector('.service-detail-areas ul');
+
+  let activeId = null;
+
+  document.querySelectorAll('.service-item[data-service]').forEach(item => {
+    item.addEventListener('click', () => {
+      const id = item.dataset.service;
+
+      if (activeId === id) {
+        item.classList.remove('active');
+        detail.classList.remove('open');
+        activeId = null;
+        return;
+      }
+
+      document.querySelectorAll('.service-item.active').forEach(el => el.classList.remove('active'));
+
+      const d = serviceData[id];
+      detailNum.textContent = id;
+      detailTitle.textContent = d.title;
+      detailEn.textContent = d.en;
+      detailText.textContent = d.body;
+      detailAreas.innerHTML = d.areas.map(a => `<li>${a}</li>`).join('');
+
+      item.classList.add('active');
+      detail.classList.add('open');
+      activeId = id;
+    });
+  });
 </script>
 </body>
 </html>
