@@ -530,7 +530,7 @@
     background: var(--ink);
     color: var(--white);
     text-align: center;
-    padding: 100px 140px;
+    padding: 100px 60px;
   }
 
   #contact .section-label { color: var(--gold); }
@@ -586,7 +586,7 @@
       gap: 0;
       background: rgba(253,252,250,0.97);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--ash);
+      border-bottom: none;
       max-height: 0;
       overflow: hidden;
       padding: 0;
@@ -598,6 +598,7 @@
     .nav-links.open {
       max-height: 400px;
       padding: 28px 0;
+      border-bottom: 1px solid var(--ash);
     }
 
     .nav-links li a {
@@ -623,6 +624,12 @@
     .company-label { border-right: none; border-bottom: 1px solid var(--ash); }
 
     footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 28px; }
+
+    .service-item { padding: 18px 20px; }
+    .service-num { font-size: 28px; margin-bottom: 10px; }
+    .service-name { font-size: 14px; }
+
+    #contact { padding: 80px 28px; }
   }
 
   @media (max-width: 600px) {
@@ -1018,6 +1025,7 @@
       item.classList.add('active');
       detail.classList.add('open');
       activeId = id;
+      setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
     });
   });
 </script>
