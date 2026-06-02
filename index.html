@@ -177,32 +177,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0px;
     text-align: center;
-    margin-top: -60px;
   }
 
   .hero-catch {
-    position: relative;
-    z-index: 2;
     font-family: var(--serif);
-    font-size: clamp(18px, 2vw, 28px);
+    font-size: clamp(24px, 3.2vw, 44px);
     font-weight: 300;
-    color: rgba(255,255,255,0.88);
-    letter-spacing: 0.28em;
-    margin-top: -50px;
-  }
-
-  .hero-center-logo {
-    position: relative;
-    z-index: 1;
-    width: clamp(494px, 68vw, 936px);
-    height: auto;
-    filter:
-      drop-shadow(1px 0 0 white)
-      drop-shadow(-1px 0 0 white)
-      drop-shadow(0 1px 0 white)
-      drop-shadow(0 -1px 0 white);
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.18em;
+    line-height: 1.6;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
   }
 
   .hero-scroll {
@@ -541,9 +526,70 @@
 
   .contact-sub {
     font-size: 15px;
-    color: rgba(253,252,250,0.45);
+    color: rgba(253,252,250,0.55);
     margin-bottom: 56px;
+    letter-spacing: 0.05em;
+    line-height: 2.2;
+  }
+
+  .contact-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 20px 56px;
+    background: var(--white);
+    border: 2px solid var(--gold);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .contact-btn:hover {
+    background: var(--gold);
+    color: var(--white);
+  }
+
+  .contact-btn-arrow {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: normal;
+    transition: transform 0.3s;
+  }
+
+  .contact-btn:hover .contact-btn-arrow {
+    transform: translateX(6px);
+  }
+
+  .contact-email {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(253,252,250,0.85);
     letter-spacing: 0.1em;
+    border-bottom: 1px solid rgba(184,146,74,0.5);
+    padding-bottom: 4px;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-email:hover {
+    color: var(--gold-light);
+  }
+
+  .contact-note {
+    font-size: 12px;
+    color: rgba(253,252,250,0.3);
+    letter-spacing: 0.15em;
   }
 
   footer {
@@ -611,8 +657,7 @@
 
     section { padding: 80px 28px; }
 
-    .hero-center-logo { width: clamp(160px, 60vw, 280px); }
-    .hero-catch { font-size: 16px; letter-spacing: 0.15em; margin-top: -35px; }
+    .hero-catch { font-size: clamp(26px, 7vw, 36px); letter-spacing: 0.12em; }
 
     #philosophy { gap: 32px; }
     #message { grid-template-columns: 1fr; }
@@ -776,7 +821,6 @@
     <img src="20240316-002.avif" alt="フォローリンクス">
   </div>
   <div class="hero-center fade-up">
-    <img src="logo.png" alt="株式会社フォローリンクス" class="hero-center-logo">
     <p class="hero-catch">つながりが、未来を動かす。</p>
   </div>
 </section>
@@ -917,7 +961,14 @@
 <section id="contact">
   <p class="section-label fade-up">Contact</p>
   <h2 class="section-title fade-up d1">お問い合わせ</h2>
-  <p class="contact-sub fade-up d2">ご相談・お問い合わせはお気軽にどうぞ</p>
+  <p class="contact-sub fade-up d2">採用・研修・SNS・営業・Web制作に関するご相談、<br>お見積もりなど、まずはお気軽にご連絡ください。</p>
+  <div class="contact-body fade-up d3">
+    <a href="mailto:nariyama@followlinks.co.jp" class="contact-btn">
+      メールでお問い合わせ
+      <span class="contact-btn-arrow">→</span>
+    </a>
+    <a href="mailto:nariyama@followlinks.co.jp" class="contact-email">nariyama@followlinks.co.jp</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
